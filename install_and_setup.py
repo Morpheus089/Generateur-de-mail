@@ -1,20 +1,11 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Script d'installation et configuration pour le générateur de mails
-Installe automatiquement les dépendances nécessaires et configure MySQL
-"""
-
 import subprocess
 import sys
 import os
 
 def install_dependencies():
-    """Installe toutes les dépendances Python nécessaires"""
     print("🔧 INSTALLATION DES DÉPENDANCES")
     print("=" * 50)
     
-    # Liste des modules requis
     dependencies = [
         "mysql-connector-python",
         "customtkinter", 
@@ -50,7 +41,6 @@ def check_mysql_config():
         print(f"Utilisateur: {config.DB_USER}")
         print(f"Base de données: {config.DB_NAME}")
         
-        # Test de connexion
         print("\nTest de connexion...")
         try:
             import mysql.connector
@@ -87,7 +77,6 @@ def run_diagnostic():
     print("=" * 50)
     
     try:
-        # Importer et lancer le test
         sys.path.append(os.path.dirname(os.path.abspath(__file__)))
         from test_mysql_connection import run_full_diagnostic
         
@@ -102,15 +91,12 @@ def main():
     print("🚀 INSTALLATION ET CONFIGURATION - GÉNÉRATEUR DE MAILS V2")
     print("=" * 70)
     
-    # Étape 1: Installation des dépendances
     if not install_dependencies():
         print("\n❌ Échec de l'installation des dépendances")
         return False
-    
-    # Étape 2: Vérification de la configuration MySQL
+        
     mysql_ok = check_mysql_config()
     
-    # Étape 3: Diagnostic complet
     print("\n" + "=" * 70)
     if mysql_ok:
         print("✅ INSTALLATION RÉUSSIE - MYSQL CONFIGURÉ")
